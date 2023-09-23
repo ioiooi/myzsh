@@ -1,0 +1,7 @@
+# exclude plugins
+plugins/*
+# except the plugins setup script
+!plugins/setup-plugins.zsh
+
+secrets.zsh
+extra.zsh
