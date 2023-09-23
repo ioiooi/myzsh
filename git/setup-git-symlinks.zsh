@@ -7,6 +7,7 @@ script_dir="$(cd "$(dirname "$0")" && pwd)"
 declare -A files=(
   ["$script_dir/.gitconfig"]="$HOME/.gitconfig"
   ["$script_dir/.git-templates"]="$HOME/.git-templates"
+  ["$script_dir/.gitignore"]="$HOME/.gitignore"
 )
 
 # Loop through the files and create symlinks if needed
