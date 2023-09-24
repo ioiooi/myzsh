@@ -1,5 +1,3 @@
-#!/usr/bin/env zsh
-
 # Easier navigation: .., ..., ...., ....., ~ and -
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Cheatsheet#commands
 

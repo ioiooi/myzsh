@@ -28,20 +28,9 @@ or install via wget
 sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
 ```
 
-## Edit `~/.zshrc`
+## Set up config
 
-
-Set the custom folder
-
-```zsh
-ZSH_CUSTOM=~/projects/myzsh
-```
-
-Remove the plugins
-
-```
-# plugins=(git)
-```
+Run the script `rsync-files.zsh`.
 
 ## Custom commands or secrets
 

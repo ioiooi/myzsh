@@ -1,7 +1,7 @@
 #!/bin/zsh
 
-# Get the absolute path to the directory containing this script
-script_dir="$(cd "$(dirname "$0")" && pwd)"
+# Get the oh my zsh custom plugins directory
+zsh_custom_plugins_dir="$ZSH_CUSTOM/plugins"
 
 # Define the repositories and their URLs
 repositories=(
@@ -13,7 +13,7 @@ repositories=(
 clone_or_update_repo() {
   local repo_name="$1"
   local repo_url="$2"
-  local repo_dir="$script_dir/$repo_name"
+  local repo_dir="$zsh_custom_plugins_dir/$repo_name"
 
   if [ -d "$repo_dir" ]; then
     echo "Updating $repo_name..."
@@ -33,6 +33,6 @@ done
 
 # Cleanup: Unset the function and variables
 unset -f clone_or_update_repo
-unset repositories script_dir repo_info repo_name repo_url
+unset repositories zsh_custom_plugins_dir repo_info repo_name repo_url
 
 echo "Script execution complete."

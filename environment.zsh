@@ -1,5 +1,3 @@
-#!/usr/bin/env zsh
-
 # Make vim the default editor.
 export EDITOR='/usr/bin/vim';
 
@@ -12,3 +10,8 @@ export LC_ALL='en_US.UTF-8';
 
 # Don’t clear the screen after quitting a manual page.
 export MANPAGER='less -X';
+
+# Add /home/<user>/bin to PATH
+if [ -d "$HOME/bin" ] ; then
+  PATH="$PATH:$HOME/bin"
+fi
