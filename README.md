@@ -30,11 +30,12 @@ sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/ins
 
 ## Set up config
 
-Run the script `rsync-files.zsh`.
+- Install plugins `install-plugins.zsh`.
+- Copy dotfiles `rsync-files.zsh`.
 
-## Custom commands or secrets
+## Custom commands
 
-Add custom commands or secrets that should not be tracked by git to `extra.zsh` and `secrets.zsh`.
+Add custom commands to `extra.zsh`.
 
 ## Set up gitconfig
 
