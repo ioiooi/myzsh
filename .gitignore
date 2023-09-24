@@ -2,3 +2,5 @@
 plugins/*
 # except the plugins setup script
 !plugins/setup-plugins.zsh
+
+extra.zsh
