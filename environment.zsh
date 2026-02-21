@@ -1,5 +1,14 @@
+#!/usr/bin/env zsh
+
 # Make vim the default editor.
-export EDITOR='/usr/bin/vim';
+export EDITOR='vim';
+
+# Enable persistent REPL history for `node`.
+export NODE_REPL_HISTORY=~/.node_history;
+# Allow 32³ entries; the default is 1000.
+export NODE_REPL_HISTORY_SIZE='32768';
+# Use sloppy mode by default, matching web browsers.
+export NODE_REPL_MODE='sloppy';
 
 # Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
 export PYTHONIOENCODING='UTF-8';
@@ -8,10 +17,17 @@ export PYTHONIOENCODING='UTF-8';
 export LANG='en_US.UTF-8';
 export LC_ALL='en_US.UTF-8';
 
-# Don’t clear the screen after quitting a manual page.
+# Highlight section titles in manual pages (yellow bold).
+export LESS_TERMCAP_md=$'\e[1;33m';
+
+# Don't clear the screen after quitting a manual page.
 export MANPAGER='less -X';
 
-# Add /home/<user>/bin to PATH
+# Avoid issues with `gpg` as installed via Homebrew.
+# https://stackoverflow.com/a/42265848/96656
+export GPG_TTY=$(tty);
+
+# Add ~/bin to PATH
 if [ -d "$HOME/bin" ] ; then
   PATH="$PATH:$HOME/bin"
 fi

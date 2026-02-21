@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # Easier navigation: .., ..., ...., ....., ~ and -
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Cheatsheet#commands
 
@@ -19,13 +21,16 @@ alias la="ls -lAF ${colorflag}"
 # List only directories
 alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
 
+# Always use color output for `ls`
+alias ls="command ls ${colorflag}"
+
 # Always enable colored `grep` output
 # Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-# Enable aliases to be sudo’ed
+# Enable aliases to be sudo'ed
 alias sudo='sudo '
 
 # Get week number
@@ -33,14 +38,18 @@ alias week='date +%V'
 
 # IP addresses
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
-alias localip="ipconfig getifaddr en0"
+if [[ "$(uname -s)" == "Darwin" ]]; then
+	alias localip="ipconfig getifaddr en0"
+else
+	alias localip="hostname -I | awk '{print \$1}'"
+fi
 alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 
 # Show active network interfaces
 alias ifactive="ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'"
 
 # URL-encode strings
-alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
+alias urlencode='python3 -c "import sys, urllib.parse as ul; print(ul.quote_plus(sys.argv[1]))"'
 
 # Intuitive map function
 # For example, to list all directories that contain a certain file:

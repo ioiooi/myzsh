@@ -85,3 +85,48 @@ git_amend_to_commit() {
 	git commit -m "Amend to commit $target_commit" --fixup=$target_commit
 	git rebase -i --autosquash $target_commit~1
 }
+
+# Run an interactive Bash shell in a Docker container
+dexec() {
+	docker exec -it "$1" /bin/sh
+}
+
+docker-stop() {
+  echo "Stopping all running Docker containers..."
+  if [ -n "$(docker ps -q)" ]; then
+    docker stop $(docker ps -q)
+    echo "All containers stopped successfully!"
+  else
+    echo "No running containers found."
+  fi
+}
+
+docker-purge() {
+  echo "WARNING: This will remove ALL Docker data (containers, images, volumes, networks, build cache)!"
+  read "reply?Are you sure you want to continue? (y/N) "
+  echo
+  if [[ ! $reply =~ ^[Yy]$ ]]; then
+    echo "Operation cancelled."
+    return 1
+  fi
+
+  echo "Stopping all containers..."
+  docker stop $(docker ps -q) 2>/dev/null || true
+
+  echo "Removing all containers..."
+  docker rm -f $(docker ps -aq) 2>/dev/null || true
+
+  echo "Removing all images (including intermediate layers)..."
+  docker rmi -f $(docker images -aq) 2>/dev/null || true
+
+  echo "Removing all volumes..."
+  docker volume rm -f $(docker volume ls -q) 2>/dev/null || true
+
+  echo "Removing all custom networks..."
+  docker network prune -f
+
+  echo "Cleaning up build cache..."
+  docker builder prune -af
+
+  echo "Docker cleanup complete!"
+}
